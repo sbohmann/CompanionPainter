@@ -1,0 +1,8 @@
+
+module companionPainter;
+
+struct Id {
+    gid: int64;
+    eid: int64;
+    version: int64;
+}
