@@ -104,9 +104,9 @@ public class BlockMetricsTest {
             BlockMetrics blockMetrics) {
         assertEquals("rows", rows, blockMetrics.getRows());
         assertEquals("columns", columns, blockMetrics.getColumns());
-        assertEquals("first block width", firstBlockWidth, blockMetrics.width(0));
-        assertEquals("first block height", firstBlockHeight, blockMetrics.height(0));
-        assertEquals("last block width", lastBlockWidth, blockMetrics.width(columns - 1));
-        assertEquals("last block height", lastBlockHeight, blockMetrics.height(rows - 1));
+        assertEquals("first block width", firstBlockWidth, blockMetrics.blockWidth(0));
+        assertEquals("first block height", firstBlockHeight, blockMetrics.blockHeight(0));
+        assertEquals("last block width", lastBlockWidth, blockMetrics.blockWidth(columns - 1));
+        assertEquals("last block height", lastBlockHeight, blockMetrics.blockHeight(rows - 1));
     }
 }

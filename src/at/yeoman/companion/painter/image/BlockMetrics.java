@@ -26,11 +26,11 @@ class BlockMetrics {
         return columns;
     }
 
-    Size get(int x, int y) {
-        return new Size(width(x), height(y));
+    Size blockSize(int x, int y) {
+        return new Size(blockWidth(x), blockHeight(y));
     }
 
-    int width(int x) {
+    int blockWidth(int x) {
         checkWidthBounds(x);
         int result;
         if (x == columns - 1) {
@@ -50,7 +50,7 @@ class BlockMetrics {
         }
     }
 
-    int height(int y) {
+    int blockHeight(int y) {
         checkHeightBounds(y);
         int result;
         if (y == rows - 1) {
@@ -78,7 +78,7 @@ class BlockMetrics {
     private void checkResultingWidth() {
         int calculatedWidth = 0;
         for (int x = 0; x < columns; ++x) {
-            calculatedWidth += width(x);
+            calculatedWidth += blockWidth(x);
         }
         if (calculatedWidth != size.width){
             throw new RuntimeException("Logical error - calculated width: " + calculatedWidth + ", size: " + size);
@@ -88,7 +88,7 @@ class BlockMetrics {
     private void checkResultingHeight() {
         int calculatedHeight = 0;
         for (int y = 0; y < rows; ++y) {
-            calculatedHeight += height(y);
+            calculatedHeight += blockHeight(y);
         }
         if (calculatedHeight != size.height){
             throw new RuntimeException("Logical error - calculated height: " + calculatedHeight + ", size: " + size);

@@ -35,7 +35,7 @@ class BlocksForLayer {
     }
 
     private Block createBlock(int x, int y) {
-        Size size = blockMetrics.get(x, y);
+        Size size = blockMetrics.blockSize(x, y);
         return new Block();
     }
 }
