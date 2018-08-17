@@ -1,12 +1,12 @@
 package at.yeoman.companion.painter.image;
 
-public class BlockMetrics {
+class BlockMetrics {
     private final Size size;
     private final Position offset;
     private int rows;
     private int columns;
 
-    public BlockMetrics(Size size, Position offset) {
+    BlockMetrics(Size size, Position offset) {
         this.size = size;
         this.offset = offset;
         calculateRowsAndColumns();
@@ -18,11 +18,11 @@ public class BlockMetrics {
         columns = (size.width + offset.x + Block.Width - 1) / Block.Width;
     }
 
-    public int getRows() {
+    int getRows() {
         return rows;
     }
 
-    public int getColumns() {
+    int getColumns() {
         return columns;
     }
 
