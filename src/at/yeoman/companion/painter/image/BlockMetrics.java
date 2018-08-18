@@ -9,13 +9,29 @@ class BlockMetrics {
     BlockMetrics(Size size, Position offset) {
         this.size = size;
         this.offset = offset;
+        Block.checkOffsetBounds(offset);
+        checkSizeAndOffset();
         calculateRowsAndColumns();
         checkResultingSize();
+    }
+
+    private void checkSizeAndOffset() {
+        if (offset.x >= size.width || offset.y >= size.height) {
+            throw new IllegalArgumentException("size: " + size + ", offset: " + offset);
+        }
     }
 
     private void calculateRowsAndColumns() {
         rows = (size.height + offset.y + Block.Height - 1) / Block.Height;
         columns = (size.width + offset.x + Block.Width - 1) / Block.Width;
+    }
+
+    Size getSize() {
+        return size;
+    }
+
+    Position getOffset() {
+        return offset;
     }
 
     int getRows() {
@@ -26,12 +42,34 @@ class BlockMetrics {
         return columns;
     }
 
+    public Position blockPosition(int x, int y) {
+        return new Position(blockX(x), blockY(y));
+    }
+
+    int blockX(int x) {
+        checkXBounds(x);
+        if (x == 0) {
+            return 0;
+        } else {
+            return (x * Block.Width - offset.x);
+        }
+    }
+
+    int blockY(int y) {
+        checkYBounds(y);
+        if (y == 0) {
+            return 0;
+        } else {
+            return (y * Block.Height - offset.x);
+        }
+    }
+
     Size blockSize(int x, int y) {
         return new Size(blockWidth(x), blockHeight(y));
     }
 
     int blockWidth(int x) {
-        checkWidthBounds(x);
+        checkXBounds(x);
         int result;
         if (x == columns - 1) {
             result = (size.width + offset.x) - (columns - 1) * Block.Width;
@@ -44,14 +82,8 @@ class BlockMetrics {
         return result;
     }
 
-    private void checkWidthBounds(int x) {
-        if (x < 0 || x >= columns) {
-            throw new IndexOutOfBoundsException("x: " + x + ", columns: " + columns);
-        }
-    }
-
     int blockHeight(int y) {
-        checkHeightBounds(y);
+        checkYBounds(y);
         int result;
         if (y == rows - 1) {
             result = (size.height + offset.y) - (rows - 1) * Block.Height;
@@ -64,7 +96,13 @@ class BlockMetrics {
         return result;
     }
 
-    private void checkHeightBounds(int y) {
+    private void checkXBounds(int x) {
+        if (x < 0 || x >= columns) {
+            throw new IndexOutOfBoundsException("x: " + x + ", columns: " + columns);
+        }
+    }
+
+    private void checkYBounds(int y) {
         if (y < 0 || y >= rows) {
             throw new IndexOutOfBoundsException("y: " + y + ", rows: " + rows);
         }
@@ -93,5 +131,15 @@ class BlockMetrics {
         if (calculatedHeight != size.height){
             throw new RuntimeException("Logical error - calculated height: " + calculatedHeight + ", size: " + size);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "BlockMetrics{" +
+                "size=" + size +
+                ", offset=" + offset +
+                ", rows=" + rows +
+                ", columns=" + columns +
+                '}';
     }
 }

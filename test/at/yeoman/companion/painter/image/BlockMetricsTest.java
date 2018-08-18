@@ -6,6 +6,13 @@ import static org.junit.Assert.*;
 
 public class BlockMetricsTest {
     @Test
+    public void empty() {
+        assertEmpty(new BlockMetrics(new Size(0, 0), new Position(0, 0)));
+        assertEmptyProduct(new BlockMetrics(new Size(1, 0), new Position(0, 0)));
+        assertEmptyProduct(new BlockMetrics(new Size(0, 1), new Position(0, 0)));
+    }
+
+    @Test
     public void singleBlock() {
         assertSize(1, 1, Block.Width, Block.Height, Block.Width, Block.Height, new BlockMetrics(new Size(1024, 1024), new Position(0, 0)));
 
@@ -92,6 +99,15 @@ public class BlockMetricsTest {
         assertSize(3, 4, Block.Width - 1, Block.Height, 2, Block.Height, new BlockMetrics(new Size(3 * 1024 + 1, 3 * 1024), new Position(1, 0)));
         assertSize(3, 3, Block.Width - 1, Block.Height, 2, Block.Height, new BlockMetrics(new Size(2 * 1024 + 1, 3 * 1024), new Position(1, 0)));
         assertSize(2, 4, Block.Width - 1, Block.Height, 2, Block.Height, new BlockMetrics(new Size(3 * 1024 + 1, 2 * 1024), new Position(1, 0)));
+    }
+
+    private void assertEmpty(BlockMetrics blockMetrics) {
+        assertEquals("rows", 0, blockMetrics.getRows());
+        assertEquals("column", 0, blockMetrics.getColumns());
+    }
+
+    private void assertEmptyProduct(BlockMetrics blockMetrics) {
+        assertEquals("rows * columns", 0, blockMetrics.getRows() * blockMetrics.getColumns());
     }
 
     private void assertSize(

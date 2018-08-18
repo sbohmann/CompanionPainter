@@ -6,8 +6,8 @@ class BlocksForLayer {
     private int columns;
     private Block[] blocks;
 
-    BlocksForLayer(Size size, Position offset) {
-        blockMetrics = new BlockMetrics(size, offset);
+    BlocksForLayer(BlockMetrics blockMetrics) {
+        this.blockMetrics = blockMetrics;
     }
 
     Block[] create() {

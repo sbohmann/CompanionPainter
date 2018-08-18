@@ -3,6 +3,8 @@ package at.yeoman.companion.painter.image;
 import java.util.Objects;
 
 public final class Position {
+    public static final Position Zero = new Position(0, 0);
+
     public final int x;
     public final int y;
 
