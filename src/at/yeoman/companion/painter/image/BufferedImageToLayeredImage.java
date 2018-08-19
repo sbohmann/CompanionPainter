@@ -1,5 +1,7 @@
 package at.yeoman.companion.painter.image;
 
+import at.yeoman.companion.painter.Position;
+
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 

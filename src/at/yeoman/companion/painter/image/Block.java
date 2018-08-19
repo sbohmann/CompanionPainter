@@ -1,8 +1,11 @@
 package at.yeoman.companion.painter.image;
 
+import at.yeoman.companion.painter.Position;
+import at.yeoman.companion.painter.Size;
+
 class Block {
-    static final int Width = 1024;
-    static final int Height = 1024;
+    static final int Width = 128;
+    static final int Height = 128;
 
     final Size size;
     final Position position;

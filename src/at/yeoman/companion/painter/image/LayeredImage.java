@@ -1,6 +1,9 @@
 package at.yeoman.companion.painter.image;
 
-import java.awt.image.WritableRaster;
+import at.yeoman.companion.painter.Position;
+import at.yeoman.companion.painter.Size;
+
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,10 +56,14 @@ public class LayeredImage {
         return new Layer(blockMetrics);
     }
 
-    public void writeToRaster(WritableRaster raster) {
-        LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, raster);
+    public void writeToBufferedImage(BufferedImage target) {
+        LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, target);
         for (Layer layer : layers) {
             imageToRaster.writeLayer(layer);
         }
+    }
+
+    public LayerView getLayerView(int index) {
+        return new LayerView(layers.get(index));
     }
 }

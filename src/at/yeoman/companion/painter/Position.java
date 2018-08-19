@@ -1,4 +1,4 @@
-package at.yeoman.companion.painter.image;
+package at.yeoman.companion.painter;
 
 import java.util.Objects;
 

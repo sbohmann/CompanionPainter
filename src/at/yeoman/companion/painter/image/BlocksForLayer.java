@@ -1,5 +1,8 @@
 package at.yeoman.companion.painter.image;
 
+import at.yeoman.companion.painter.Position;
+import at.yeoman.companion.painter.Size;
+
 class BlocksForLayer {
     private final BlockMetrics blockMetrics;
     private int rows;

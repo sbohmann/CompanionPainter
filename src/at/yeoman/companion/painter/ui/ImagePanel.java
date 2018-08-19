@@ -1,7 +1,7 @@
 package at.yeoman.companion.painter.ui;
 
 import at.yeoman.companion.painter.image.LayeredImage;
-import at.yeoman.companion.painter.image.Size;
+import at.yeoman.companion.painter.Size;
 
 import javax.swing.*;
 import java.awt.*;

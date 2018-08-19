@@ -1,4 +1,4 @@
-package at.yeoman.companion.painter.image;
+package at.yeoman.companion.painter;
 
 import java.util.Objects;
 
@@ -15,9 +15,13 @@ public final class Size {
     }
 
     public void checkBounds(int x, int y) {
-        if (x < 0 || y < 0 || x >= width || y >= height) {
+        if (!contains(x, y)) {
             throw new IllegalArgumentException("x: " + x + ", y: " + y + ", width: " + width + ", height: " + height);
         }
+    }
+
+    public boolean contains(int x, int y) {
+        return x >= 0 && y >= 0 && x < width && y < height;
     }
 
     @Override

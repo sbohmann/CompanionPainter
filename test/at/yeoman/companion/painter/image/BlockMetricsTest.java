@@ -1,5 +1,7 @@
 package at.yeoman.companion.painter.image;
 
+import at.yeoman.companion.painter.Position;
+import at.yeoman.companion.painter.Size;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
