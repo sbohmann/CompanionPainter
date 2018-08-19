@@ -42,69 +42,69 @@ class BlockMetrics {
         return columns;
     }
 
-    public Position blockPosition(int x, int y) {
-        return new Position(blockX(x), blockY(y));
+    Position blockPosition(int row, int column) {
+        return new Position(blockX(column), blockY(row));
     }
 
-    int blockX(int x) {
-        checkXBounds(x);
-        if (x == 0) {
+    int blockX(int column) {
+        checkColumnBounds(column);
+        if (column == 0) {
             return 0;
         } else {
-            return (x * Block.Width - offset.x);
+            return (column * Block.Width - offset.x);
         }
     }
 
-    int blockY(int y) {
-        checkYBounds(y);
-        if (y == 0) {
+    int blockY(int row) {
+        checkRowBounds(row);
+        if (row == 0) {
             return 0;
         } else {
-            return (y * Block.Height - offset.x);
+            return (row * Block.Height - offset.x);
         }
     }
 
-    Size blockSize(int x, int y) {
-        return new Size(blockWidth(x), blockHeight(y));
+    Size blockSize(int row, int column) {
+        return new Size(blockWidth(column), blockHeight(row));
     }
 
-    int blockWidth(int x) {
-        checkXBounds(x);
+    int blockHeight(int row) {
+        checkRowBounds(row);
         int result;
-        if (x == columns - 1) {
-            result = (size.width + offset.x) - (columns - 1) * Block.Width;
-        } else {
-            result = Block.Width;
-        }
-        if (x == 0) {
-            result -= offset.x;
-        }
-        return result;
-    }
-
-    int blockHeight(int y) {
-        checkYBounds(y);
-        int result;
-        if (y == rows - 1) {
+        if (row == rows - 1) {
             result = (size.height + offset.y) - (rows - 1) * Block.Height;
         } else {
             result = Block.Height;
         }
-        if (y == 0) {
+        if (row == 0) {
             result -= offset.y;
         }
         return result;
     }
 
-    private void checkXBounds(int x) {
-        if (x < 0 || x >= columns) {
-            throw new IndexOutOfBoundsException("x: " + x + ", columns: " + columns);
+    int blockWidth(int column) {
+        checkColumnBounds(column);
+        int result;
+        if (column == columns - 1) {
+            result = (size.width + offset.x) - (columns - 1) * Block.Width;
+        } else {
+            result = Block.Width;
+        }
+        if (column == 0) {
+            result -= offset.x;
+        }
+        return result;
+    }
+
+    private void checkRowBounds(int row) {
+        if (row < 0 || row >= rows) {
+            throw new IndexOutOfBoundsException("row: " + row + ", rows: " + rows);
         }
     }
 
-    private void checkYBounds(int y) {
-        if (y < 0 || y >= rows) {
-            throw new IndexOutOfBoundsException("y: " + y + ", rows: " + rows);
+    private void checkColumnBounds(int column) {
+        if (column < 0 || column >= columns) {
+            throw new IndexOutOfBoundsException("column: " + column + ", columns: " + columns);
         }
     }
 
@@ -118,7 +118,7 @@ class BlockMetrics {
         for (int x = 0; x < columns; ++x) {
             calculatedWidth += blockWidth(x);
         }
-        if (calculatedWidth != size.width){
+        if (calculatedWidth != size.width) {
             throw new RuntimeException("Logical error - calculated width: " + calculatedWidth + ", size: " + size);
         }
     }
@@ -128,7 +128,7 @@ class BlockMetrics {
         for (int y = 0; y < rows; ++y) {
             calculatedHeight += blockHeight(y);
         }
-        if (calculatedHeight != size.height){
+        if (calculatedHeight != size.height) {
             throw new RuntimeException("Logical error - calculated height: " + calculatedHeight + ", size: " + size);
         }
     }

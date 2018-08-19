@@ -14,6 +14,12 @@ public final class Size {
         }
     }
 
+    public void checkBounds(int x, int y) {
+        if (x < 0 || y < 0 || x >= width || y >= height) {
+            throw new IllegalArgumentException("x: " + x + ", y: " + y + ", width: " + width + ", height: " + height);
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

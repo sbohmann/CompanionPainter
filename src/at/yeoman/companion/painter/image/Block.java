@@ -1,16 +1,16 @@
 package at.yeoman.companion.painter.image;
 
-import java.util.Random;
-
 class Block {
     static final int Width = 1024;
     static final int Height = 1024;
 
     final Size size;
+    final Position position;
     final int[] data;
 
-    Block(Size size) {
+    Block(Size size, Position position) {
         this.size = size;
+        this.position = position;
         if (size.width < 1 || size.height < 1) {
             throw new IllegalArgumentException("width [" + size.width + "] or height [" + size.height + "] < 1");
         }

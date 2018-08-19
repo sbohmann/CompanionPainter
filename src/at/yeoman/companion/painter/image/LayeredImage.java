@@ -54,7 +54,7 @@ public class LayeredImage {
     }
 
     public void writeToRaster(WritableRaster raster) {
-        LayeredImageToRaster imageToRaster = new LayeredImageToRaster(blockMetrics, raster);
+        LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, raster);
         for (Layer layer : layers) {
             imageToRaster.writeLayer(layer);
         }

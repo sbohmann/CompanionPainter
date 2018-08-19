@@ -23,19 +23,20 @@ class BlocksForLayer {
     }
 
     private void createBlocks() {
-        for (int y = 0; y < rows; ++y) {
-            for (int x = 0; x < columns; ++x) {
-                blocks[blockIndex(x, y)] = createBlock(x, y);
+        for (int row = 0; row < rows; ++row) {
+            for (int column = 0; column < columns; ++column) {
+                blocks[blockIndex(row, column)] = createBlock(row, column);
             }
         }
     }
 
-    private int blockIndex(int x, int y) {
-        return y * columns + x;
+    private int blockIndex(int row, int column) {
+        return row * columns + column;
     }
 
-    private Block createBlock(int x, int y) {
-        Size size = blockMetrics.blockSize(x, y);
-        return new Block(size);
+    private Block createBlock(int row, int column) {
+        Size size = blockMetrics.blockSize(row, column);
+        Position position = blockMetrics.blockPosition(row, column);
+        return new Block(size, position);
     }
 }
