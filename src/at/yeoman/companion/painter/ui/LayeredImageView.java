@@ -126,13 +126,7 @@ class LayeredImageView extends JPanel {
     }
 
     private int sign(int n) {
-        if (n > 0) {
-            return 1;
-        } else if (n < 0) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(n, 0);
     }
 
     private void put(int x, int y, int color) {
