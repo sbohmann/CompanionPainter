@@ -8,8 +8,10 @@ import java.awt.image.WritableRaster;
 class LayeredImageToBufferedImage {
     private final BlockMetrics blockMetrics;
     private final WritableRaster raster;
+    private Position targetOffset;
 
-    LayeredImageToBufferedImage(BlockMetrics blockMetrics, BufferedImage target) {
+    LayeredImageToBufferedImage(BlockMetrics blockMetrics, BufferedImage target, Position targetOffset) {
+        this.targetOffset = targetOffset;
         checkTargetSize(blockMetrics, target);
         this.blockMetrics = blockMetrics;
         this.raster = target.getRaster();

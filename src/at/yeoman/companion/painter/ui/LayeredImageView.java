@@ -17,7 +17,7 @@ class LayeredImageView extends JPanel {
     private BufferedImage buffer;
     private boolean bufferInvalidated;
 
-    Position lastPosition = null;
+    private Position lastPosition = null;
 
     LayeredImageView(LayeredImage image) {
         this.image = image;
@@ -42,7 +42,7 @@ class LayeredImageView extends JPanel {
     }
 
     private void fillBuffer() {
-        image.writeToBufferedImage(buffer);
+        image.writeToBufferedImage(buffer, Position.Zero);
     }
 
     private void setupMouseHandling() {

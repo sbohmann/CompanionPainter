@@ -56,11 +56,38 @@ public class LayeredImage {
         return new Layer(blockMetrics);
     }
 
-    public void writeToBufferedImage(BufferedImage target) {
-        LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, target);
+    /**
+     * @param targetOffset position in this image to coincide with (0,0) on the target
+     */
+    public void writeToBufferedImage(BufferedImage target, Position targetOffset) {
+        if (!targetOffset.equals(Position.Zero)) {
+            throw new UnsupportedOperationException("target offset not yet implemented");
+        }
+        long before = System.nanoTime();
+        LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, target, targetOffset);
         for (Layer layer : layers) {
             imageToRaster.writeLayer(layer);
         }
+        long after = System.nanoTime();
+        System.out.println("deltaT (ns): " + (after - before));
+    }
+
+    /**
+     * @param targetOffset position in the zoomed view of this image to coincide with (0,0) on the target
+     * @param zoomStep     minimum 0, maxmimum 31, zoom is 1 << zoomStep
+     */
+    public void writeToBufferedImage(BufferedImage target, Position targetOffset, int zoomStep) {
+        if (zoomStep == 0) {
+            writeToBufferedImage(target, targetOffset);
+        } else if (zoomStep > 0 && zoomStep <= 30) {
+            writeToBufferedImageWithZoom(target, targetOffset);
+        } else {
+            throw new IllegalArgumentException("zoomStep < 0 or > 30: " + zoomStep);
+        }
+    }
+
+    private void writeToBufferedImageWithZoom(BufferedImage target, Position targetOffset) {
+        throw new UnsupportedOperationException("zoom not yet implemented");
     }
 
     public LayerView getLayerView(int index) {
