@@ -63,13 +63,10 @@ public class LayeredImage {
         if (!targetOffset.equals(Position.Zero)) {
             throw new UnsupportedOperationException("target offset not yet implemented");
         }
-        long before = System.nanoTime();
         LayeredImageToBufferedImage imageToRaster = new LayeredImageToBufferedImage(blockMetrics, target, targetOffset);
         for (Layer layer : layers) {
             imageToRaster.writeLayer(layer);
         }
-        long after = System.nanoTime();
-        System.out.println("deltaT (ns): " + (after - before));
     }
 
     /**
