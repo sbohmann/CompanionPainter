@@ -5,9 +5,9 @@ import at.yeoman.companion.painter.ui.MainWindow;
 import javax.swing.*;
 import java.lang.reflect.InvocationTargetException;
 
-public class Painter {
+public class CompanionPainter {
     public static void main(String[] args) throws InvocationTargetException, InterruptedException {
-        new Painter().run();
+        new CompanionPainter().run();
     }
 
     private void run() throws InvocationTargetException, InterruptedException {
